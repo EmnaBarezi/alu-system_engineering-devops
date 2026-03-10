@@ -3,18 +3,6 @@
 apt-get update
 apt-get -y install nginx
 echo "Holberton School" > /var/www/html/index.html
-HOST=$(hostname)
-CONFIG=\
-"server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /var/www/html;
-	index index.html index.htm index.nginx-debian.html;
-	server_name _;
-	location / {
-		try_files \$uri \$uri/ =404;
-	}
-	add_header X-Served-By $HOST;
-}"
-echo -e "$CONFIG" > /etc/nginx/sites-enabled/default
+sed -i "s/# server_tokens off;/server_tokens off;\n\tadd_header X-Served-By \$HOSTNAME;/" /etc/nginx/nginx.conf
+sed -i "/server_name _;/a \\\tadd_header X-Served-By \$HOSTNAME;" /etc/nginx/sites-available/default
 service nginx restart
