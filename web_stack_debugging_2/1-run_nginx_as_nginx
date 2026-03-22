@@ -6,3 +6,4 @@ sed -i 's/listen \[::\]:80 default_server/listen [::]:8080 default_server/' /etc
 pkill nginx
 sleep 1
 /usr/sbin/nginx
+ps aux | grep nginx
