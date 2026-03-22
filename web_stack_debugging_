@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# Fix Apache to return Hello Holberton
-service apache2 start
